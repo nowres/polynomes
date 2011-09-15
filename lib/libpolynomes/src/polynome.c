@@ -88,3 +88,10 @@ int polynome_value ( polynome_t *poly, double x , double *result)
 	}
 	return 1;
 }
+
+/* @stub */
+int set_polynome ( polynome_t *poly , double *factors, unsigned int order)
+{
+    
+    return 0;
+}
