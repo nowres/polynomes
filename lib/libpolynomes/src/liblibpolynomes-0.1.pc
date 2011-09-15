@@ -1,0 +1,13 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+includedir=${prefix}/include/liblibpolynomes-0.1
+
+Name: liblibpolynomes
+Description: Sample library created by Anjuta project wizard.
+Version: 0.1
+Requires: 
+Libs: -L${libdir} -llibpolynomes
+Cflags: -I${includedir}

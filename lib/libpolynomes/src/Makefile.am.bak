@@ -18,8 +18,7 @@ liblibpolynomes_la_SOURCES = \
 	lib.c               \
 	monome.c               \
 	monome.h               \
-	polynome.c               \
-	polynome.h
+	polynome.c
 
 liblibpolynomes_la_LDFLAGS = 
 

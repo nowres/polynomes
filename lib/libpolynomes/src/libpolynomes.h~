@@ -17,14 +17,4 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "monome.h"
-
-struct polynome_t {
-	_lp_monome_t *first;
-	unsigned int order;
-};
-
-typedef struct polynome_t polynome_t;
-
-
 int libpolynomes_func (void);
