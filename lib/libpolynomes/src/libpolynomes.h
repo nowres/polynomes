@@ -17,7 +17,17 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "monome.h"
+#ifndef _MONOME_H_LIBPOLYNOMES_INCLUDED
+#define _MONOME_H_LIBPOLYNOMES_INCLUDED
+
+struct _lp_monome_t {
+	double factor;
+	struct _lp_monome_t *next;
+};
+
+typedef struct _lp_monome_t _lp_monome_t;
+
+#endif
 
 struct polynome_t {
 	_lp_monome_t *first;
@@ -26,5 +36,10 @@ struct polynome_t {
 
 typedef struct polynome_t polynome_t;
 
-
-int libpolynomes_func (void);
+polynome_t* create_polynome ( void );
+void init_polynome ( polynome_t *poly );
+void reset_polynome ( polynome_t *poly );
+int push_monome ( polynome_t *poly, double factor );
+int pop_monome ( polynome_t *poly , double *factor);
+int polynome_value ( polynome_t *poly, double x , double *result);
+int set_polynome ( polynome_t *poly , double *factors, unsigned int order);

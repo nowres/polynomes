@@ -26,7 +26,7 @@
 #include "libpolynomes.h"
 #include <stdlib.h>
  
-polynome_t* create_polynome ( )
+polynome_t* create_polynome ( void )
 {
 	polynome_t *poly;
 	if ( (poly = malloc ( sizeof *poly )) ) {
@@ -42,10 +42,19 @@ void init_polynome ( polynome_t *poly )
 	poly->order = 0;
 }
 
-/* @stub */
-void free_polynome ( polynome_t *poly )
+
+void reset_polynome ( polynome_t *poly )
 {
-	free (poly);
+    _lp_monome_t *current;
+    current = poly->first;
+    while ( current )
+    {
+        poly->first = current->next;
+        free (current);
+        current = poly->first;
+    }
+    
+    init_polynome (poly);
 }
 
 int push_monome ( polynome_t *poly, double factor )
@@ -89,9 +98,13 @@ int polynome_value ( polynome_t *poly, double x , double *result)
 	return 1;
 }
 
-/* @stub */
 int set_polynome ( polynome_t *poly , double *factors, unsigned int order)
 {
+    reset_polynome (poly);
+    order++;
+    while ( order-- ) {
+        push_monome (poly,*(factors + order) );
+    }
     
-    return 0;
+    return poly->order;
 }
