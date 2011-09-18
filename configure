@@ -10374,7 +10374,7 @@ CC="$lt_save_CC"
 
 
 
-ac_config_files="$ac_config_files Makefile src/libpolynomes-0.1.pc src/Makefile"
+ac_config_files="$ac_config_files Makefile src/libpolynomes-0.1.pc src/Makefile tests/Makefile tests/polynomes-cli/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -11358,6 +11358,8 @@ do
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/libpolynomes-0.1.pc") CONFIG_FILES="$CONFIG_FILES src/libpolynomes-0.1.pc" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
+    "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;
+    "tests/polynomes-cli/Makefile") CONFIG_FILES="$CONFIG_FILES tests/polynomes-cli/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5 ;;
   esac

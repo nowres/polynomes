@@ -24,6 +24,5 @@ AC_OUTPUT([
 Makefile
 src/libpolynomes-0.1.pc
 src/Makefile
-tests/Makefile
-tests/polynomes-cli/Makefile
+tools/Makefile
 ])
