@@ -1,4 +1,4 @@
-polynome.lo: polynome.c libpolynomes.h /usr/include/stdlib.h \
+polynome.lo: polynome.c polynomes.h /usr/include/stdlib.h \
  /usr/include/features.h /usr/include/bits/predefs.h \
  /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
@@ -12,7 +12,7 @@ polynome.lo: polynome.c libpolynomes.h /usr/include/stdlib.h \
  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
  /usr/include/alloca.h /usr/include/bits/stdlib.h
 
-libpolynomes.h:
+polynomes.h:
 
 /usr/include/stdlib.h:
 

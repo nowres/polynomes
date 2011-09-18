@@ -3,11 +3,11 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 datarootdir=@datarootdir@
 datadir=@datadir@
-includedir=@includedir@/liblibpolynomes-0.1
+includedir=@includedir@/libpolynomes-0.1
 
-Name: liblibpolynomes
+Name: libpolynomes
 Description: Sample library created by Anjuta project wizard.
 Version: @VERSION@
 Requires: 
-Libs: -L${libdir} -llibpolynomes
+Libs: -L${libdir} -lpolynomes
 Cflags: -I${includedir}

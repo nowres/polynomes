@@ -23,7 +23,7 @@
  *  Copyright  2011  Nowres RAFID
  *  <nowres.rafed@gmail.com>
  ****************************************************************************/
-#include "libpolynomes.h"
+#include "polynomes.h"
 #include <stdlib.h>
  
 polynome_t* create_polynome ( void )

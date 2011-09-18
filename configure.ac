@@ -22,6 +22,6 @@ AM_PROG_LIBTOOL
 
 AC_OUTPUT([
 Makefile
-src/liblibpolynomes-0.1.pc
+src/libpolynomes-0.1.pc
 src/Makefile
 ])
