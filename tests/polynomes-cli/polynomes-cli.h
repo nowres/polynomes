@@ -23,3 +23,7 @@
  *  Copyright  2011  Nowres RAFID ABDULSATTAR
  *  <nowres.rafed@gmail.com>
  ****************************************************************************/
+
+/** KEYWORDS **/
+#define INVALID -1
+#define DEF 1

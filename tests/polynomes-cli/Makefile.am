@@ -12,6 +12,7 @@ AM_CFLAGS =\
 
 bin_PROGRAMS = polynomes_cli
 
-polynomes_cli_SOURCES = polynomes-cli.c
+polynomes_cli_SOURCES = polynomes-cli.c \
+                        builtins.c
 
 polynomes_cli_LDADD = $(top_builddir)/src/polynome.o

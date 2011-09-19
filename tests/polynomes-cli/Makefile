@@ -47,7 +47,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_polynomes_cli_OBJECTS = polynomes-cli.$(OBJEXT)
+am_polynomes_cli_OBJECTS = polynomes-cli.$(OBJEXT) builtins.$(OBJEXT)
 polynomes_cli_OBJECTS = $(am_polynomes_cli_OBJECTS)
 polynomes_cli_DEPENDENCIES = $(top_builddir)/src/polynome.o
 AM_V_lt = $(am__v_lt_$(V))
@@ -205,7 +205,9 @@ AM_CPPFLAGS = \
 AM_CFLAGS = \
 	 -Wall
 
-polynomes_cli_SOURCES = polynomes-cli.c
+polynomes_cli_SOURCES = polynomes-cli.c \
+                        builtins.c
+
 polynomes_cli_LDADD = $(top_builddir)/src/polynome.o
 all: all-am
 
@@ -294,6 +296,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/builtins.Po
 include ./$(DEPDIR)/polynomes-cli.Po
 
 .c.o:
