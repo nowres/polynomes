@@ -38,7 +38,7 @@ void define_polynome (char *params)
             cparams[pcount++] = strtod (ptr,NULL);
         }
         new_poly->polynome = create_polynome ();
-        set_polynome (new_poly->polynome, cparams , pcount);
+        set_polynome (new_poly->polynome, cparams , pcount - 1);
     }
     else
         printf("Syntax error!");
