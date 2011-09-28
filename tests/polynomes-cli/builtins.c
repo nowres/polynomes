@@ -17,13 +17,15 @@ struct {
 
 void define_polynome (char *params)
 {
-    char *ptr;
+    char *ptr,*eat;
     double *cparams;
     int pcount;
     struct polynomes_table_node_t *new_poly;
-    printf("defining a new polynome with params : %s\n",params);
 
-    ptr = strtok (ptr , " ,;");
+    cparams = malloc( sizeof(*cparams) * (strlen(params)) );
+    eat = malloc( sizeof(*eat) * (strlen(params) + 1) );
+    strcpy (eat ,params);
+    ptr = strtok (eat , " ");
     if (isalpha(*ptr)) {
 
         new_poly = malloc(sizeof *new_poly);
@@ -31,16 +33,40 @@ void define_polynome (char *params)
         new_poly->name = toupper(*ptr);
         polynomes_table.first = new_poly;
 
-        printf("parameters : ");
         pcount = 0;
-        ptr++;
-        while ( ptr = strtok (ptr , " ,;"))
-            cparams[pcount++] = strtod(ptr);
-            ptr += strlen (ptr); 
-            printf("%ld ",cparams[pcount - 1]);
+        while ( (ptr = strtok (NULL , " ")) ) {
+            cparams[pcount++] = strtod (ptr,NULL);
         }
+        new_poly->polynome = create_polynome ();
+        set_polynome (new_poly->polynome, cparams , pcount);
     }
-    printf ("\n");
+    else
+        printf("Syntax error!");
+}
 
-    printf("polynome %c defined\n",polynomes_table.first->name);
+int value (char *params)
+{
+    char *ptr,*eat;
+    double val,res;
+    struct polynomes_table_node_t *bal;
+
+    eat = malloc( sizeof(*eat) * (strlen(params) + 1) );
+    strcpy (eat ,params);
+    ptr = strtok (eat , " ");
+    if (isalpha(*ptr)) {
+        *ptr = toupper(*ptr);
+        bal = polynomes_table.first;
+        while ( bal ){
+            if (bal->name == *ptr) {
+                val = strtod (strtok(NULL," "),NULL);
+                polynome_value ( bal->polynome , val, &res);
+                printf("%c(%lf) = %lf",bal->name , val, res);
+                return 0;
+            }
+        }
+        printf("Polynome %c not defined",*ptr);
+        return 1;
+    }
+    printf("Syntax error!");
+    return 2;
 }

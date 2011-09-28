@@ -27,3 +27,5 @@
 /** KEYWORDS **/
 #define INVALID -1
 #define DEF 1
+#define EXIT 2
+#define VAL 3

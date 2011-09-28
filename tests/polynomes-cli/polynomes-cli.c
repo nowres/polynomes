@@ -46,7 +46,9 @@ struct keyword_t {
 typedef struct keyword_t keyword_t;
 
 keyword_t keywords[] = {
-{DEF,"def"}
+{DEF,"def"},
+{EXIT,"exit"},
+{VAL,"val"}
 };
 
 int number_of_keywords = sizeof keywords/sizeof(keyword_t);
@@ -91,10 +93,10 @@ keyword_t get_keyword ()
 
 void prompt ()
 {
-    printf("==> ");
+    printf("\n==> ");
 }
 
-void read_and_parse_shell ()
+int read_and_parse_shell ()
 {
     keyword_t key;
     prompt();
@@ -102,16 +104,23 @@ void read_and_parse_shell ()
 
     read_next_char ();
     key = get_keyword ();
-
-    switch (key.code) {
-        case DEF:define_polynome(read_buffer);break;
-        case INVALID:
-        default:fprintf(stderr,"invalid keyword\n");
-    }
+    return key.code; 
 }
 
 int main()
 {
-    read_and_parse_shell();
-    return 0;
+    int token;
+
+    while (1) {
+        token = read_and_parse_shell();
+
+        switch (token) {
+            case EXIT: exit(0);
+            case DEF: define_polynome (read_buffer);break;
+            case VAL: value (read_buffer);break;
+            case INVALID:
+            default:fprintf(stderr,"invalid keyword\n");
+        }
+    }
+    return 255;
 }
