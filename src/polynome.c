@@ -82,6 +82,22 @@ int pop_monome ( polynome_t *poly , double *factor)
 		return 0;
 }
 
+double* get_polynome_factors (polynome_t *poly)
+{
+    double *factors, *ptr;
+    _lp_monome_t *bal;
+
+    factors = malloc ( (poly->order + 1) * sizeof (*factors) );
+    
+    ptr = factors + poly->order;
+    bal = poly->first;
+    while ( bal ) {
+        *(ptr--) = bal->factor;
+        bal = bal->next;
+    }
+    return factors;
+}
+
 int polynome_value ( polynome_t *poly, double x , double *result)
 {
 	_lp_monome_t *current;
