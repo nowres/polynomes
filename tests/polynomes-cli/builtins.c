@@ -107,7 +107,7 @@ int print (const char* params)
 {
     char *ptr,sym;
     double *factors;
-    int fcount,i;
+    int fcount;
     struct polynomes_table_node_t *bal;
 
     ptr = _helper_get_first_param (params);
@@ -119,12 +119,11 @@ int print (const char* params)
                 ptr = _helper_get_next_param ();
                 sym = *ptr;
                 if ( isalpha(sym) ) {
-                    fcount = bal->polynome->order + 1;
+                    fcount = bal->polynome->order;
                     factors = get_polynome_factors (bal->polynome);
                     printf("%c(%c) = ",bal->name, sym);
-                    i = 0;
-                    while ( fcount-- ) {
-                        printf("+(%lf) %c^%d ",factors[i++],sym,fcount);
+                    while ( fcount ) {
+                        printf("+(%lf) %c^%d ",factors[fcount--],sym,fcount);
                     }
                     free (factors);
                     _helper_end_get_params ();
