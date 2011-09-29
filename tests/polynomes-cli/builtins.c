@@ -19,7 +19,7 @@ struct {
 /** BEGIN parameters manipulation helpers **/
 char *pbuf;
 
-static char* _helper_get_first_param (char *params_l)
+static char* _helper_get_first_param (const char *params_l)
 {
     if (pbuf)
         free (pbuf);
@@ -84,7 +84,7 @@ int value (const char *params)
         bal = polynomes_table.first;
         while ( bal ){
             if (bal->name == *ptr) {
-                val = _helper_get_next_param ();
+                val = strtod (_helper_get_next_param (),NULL);
                 polynome_value ( bal->polynome , val, &res);
                 printf("%c(%lf) = %lf",bal->name , val, res);
                 _helper_end_get_params ();
