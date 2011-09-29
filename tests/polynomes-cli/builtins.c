@@ -46,7 +46,7 @@ static void _helper_end_get_params ()
 **/
 void define_polynome (const char *params)
 {
-    char *ptr,*eat;
+    char *ptr;
     double *cparams;
     int pcount;
     struct polynomes_table_node_t *new_poly;
@@ -74,7 +74,7 @@ void define_polynome (const char *params)
 
 int value (const char *params)
 {
-    char *ptr,*eat;
+    char *ptr;
     double val,res;
     struct polynomes_table_node_t *bal;
 
