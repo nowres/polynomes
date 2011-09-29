@@ -19,10 +19,17 @@ struct {
 /** BEGIN parameters manipulation helpers **/
 char *pbuf;
 
+static void _helper_end_get_params ()
+{
+    if (pbuf){
+        free (pbuf);
+        pbuf = NULL;
+    }
+}
+
 static char* _helper_get_first_param (const char *params_l)
 {
-    if (pbuf)
-        free (pbuf);
+    _helper_end_get_params ();
     pbuf = malloc( sizeof(*params_l) * (strlen(params_l) + 1) );
     strcpy (pbuf , params_l);
     return strtok (pbuf, " ");
@@ -33,10 +40,6 @@ static char* _helper_get_next_param ()
     return strtok (NULL, " ");
 }
 
-static void _helper_end_get_params ()
-{
-    if (pbuf) free (pbuf);
-}
 /** END parameters manipulation helpers **/
 
 
