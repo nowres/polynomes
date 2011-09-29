@@ -48,7 +48,8 @@ typedef struct keyword_t keyword_t;
 keyword_t keywords[] = {
 {DEF,"def"},
 {EXIT,"exit"},
-{VAL,"val"}
+{VAL,"val"},
+{PRINT,"print"},
 };
 
 int number_of_keywords = sizeof keywords/sizeof(keyword_t);
@@ -118,6 +119,7 @@ int main()
             case EXIT: exit(0);
             case DEF: define_polynome (read_buffer);break;
             case VAL: value (read_buffer);break;
+            case PRINT: print (read_buffer);break;
             case INVALID:
             default:fprintf(stderr,"invalid keyword\n");
         }

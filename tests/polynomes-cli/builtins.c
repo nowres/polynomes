@@ -99,3 +99,45 @@ int value (const char *params)
     _helper_end_get_params ();
     return 2;
 }
+
+int print (const char* params)
+{
+    char *ptr,sym;
+    double *factors;
+    int fcount,i;
+    struct polynomes_table_node_t *bal;
+
+    ptr = _helper_get_first_param (params);
+    if (isalpha(*ptr)) {
+        *ptr = toupper(*ptr);
+        bal = polynomes_table.first;
+        while ( bal ){
+            if (bal->name == *ptr) {
+                ptr = _helper_get_next_param ();
+                sym = *ptr;
+                if ( isalpha(sym) ) {
+                    fcount = bal->polynome->order + 1;
+                    factors = get_polynome_factors (bal->polynome);
+                    printf("%c(%c) = ",bal->name, sym);
+                    i = 0;
+                    while ( fcount-- ) {
+                        printf("+(%lf) %c^%d ",factors[i++],sym,fcount);
+                    }
+                    free (factors);
+                    _helper_end_get_params ();
+                    return 0;
+                }else {
+                    printf("Syntax error!");
+                    _helper_end_get_params ();
+                    return 3;                
+                }
+            }
+        }
+        printf("Polynome %c not defined",*ptr);
+        _helper_end_get_params ();
+        return 1;
+    }
+    printf("Syntax error!");
+    _helper_end_get_params ();
+    return 2;
+}

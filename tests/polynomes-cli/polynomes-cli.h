@@ -29,3 +29,4 @@
 #define DEF 1
 #define EXIT 2
 #define VAL 3
+#define PRINT 4
