@@ -41,5 +41,6 @@ void init_polynome ( polynome_t *poly );
 void reset_polynome ( polynome_t *poly );
 int push_monome ( polynome_t *poly, double factor );
 int pop_monome ( polynome_t *poly , double *factor);
+double* get_polynome_factors (polynome_t *poly);
 int polynome_value ( polynome_t *poly, double x , double *result);
 int set_polynome ( polynome_t *poly , double *factors, unsigned int order);
