@@ -93,6 +93,7 @@ int value (const char *params)
                 _helper_end_get_params ();
                 return 0;
             }
+            bal = bal->next;
         }
         printf("Polynome %c not defined",*ptr);
         _helper_end_get_params ();
@@ -134,6 +135,7 @@ int print (const char* params)
                     return 3;                
                 }
             }
+            bal = bal->next;
         }
         printf("Polynome %c not defined",*ptr);
         _helper_end_get_params ();
