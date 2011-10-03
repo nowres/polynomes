@@ -46,6 +46,7 @@ struct keyword_t {
 typedef struct keyword_t keyword_t;
 
 keyword_t keywords[] = {
+{HELP,"help"},
 {DEF,"def"},
 {EXIT,"exit"},
 {VAL,"val"},
@@ -54,6 +55,19 @@ keyword_t keywords[] = {
 };
 
 int number_of_keywords = sizeof keywords/sizeof(keyword_t);
+
+
+void usage ( void )
+{
+    printf ("polynomes-cli available commands are: \n"\
+            "help : shows this message\n"\
+            "exit : quits the program\n"\
+            "def : define a new polynome (def P 1 2 0 4)\n"\
+            "print : prints a polynome (print P x)\n"\
+            "val : calculates value (val P 2)\n"\
+            "add : adds two polynomes and stores result in the first parameter (add p q)\n"\
+            "\n");
+}
 
 void read_next_char()
 {
@@ -118,6 +132,7 @@ int main()
 
         switch (token) {
             case EXIT: exit(0);
+            case HELP: usage ();break;
             case DEF: define_polynome (read_buffer);break;
             case VAL: value (read_buffer);break;
             case PRINT: print (read_buffer);break;
