@@ -131,11 +131,11 @@ int print (const char* params)
             ptr = _helper_get_next_param ();
             sym = *ptr;
             if ( isalpha(sym) ) {
-                fcount = poly->polynome->order;
+                fcount = poly->polynome->order + 1;
                 factors = get_polynome_factors (poly->polynome);
                 printf("%c(%c) = ",poly->name, sym);
                 while ( fcount ) {
-                    printf("+(%lf) %c^%d ",factors[fcount--],sym,fcount);
+                    printf("+(%lf) %c^%d ",factors[fcount],sym,--fcount);
                 }
                 free (factors);
                 _helper_end_get_params ();
