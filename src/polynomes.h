@@ -45,3 +45,4 @@ double* get_polynome_factors (polynome_t *poly);
 int polynome_value ( polynome_t *poly, double x , double *result);
 int set_polynome ( polynome_t *poly , double *factors, unsigned int order);
 polynome_t* add_2polynomes ( polynome_t *poly1, polynome_t *poly2 );
+int copy_polynome ( polynome_t *poly1, polynome_t *poly2 );

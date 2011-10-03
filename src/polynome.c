@@ -155,3 +155,15 @@ polynome_t* add_2polynomes ( polynome_t *poly1, polynome_t *poly2 )
     free (factors2);
     return res;
 }
+
+int copy_polynome ( polynome_t *poly1, polynome_t *poly2 )
+{
+    polynome_t *res;
+    double *factors;
+
+    factors = get_polynome_factors (poly2);
+    
+    set_polynome ( poly1 , factors , poly2->order );
+    free (factors);
+    return 0;
+}
