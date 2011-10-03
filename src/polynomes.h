@@ -39,6 +39,7 @@ typedef struct polynome_t polynome_t;
 polynome_t* create_polynome ( void );
 void init_polynome ( polynome_t *poly );
 void reset_polynome ( polynome_t *poly );
+void free_polynome ( polynome_t **poly );
 int push_monome ( polynome_t *poly, double factor );
 int pop_monome ( polynome_t *poly , double *factor);
 double* get_polynome_factors (polynome_t *poly);

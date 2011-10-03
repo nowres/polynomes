@@ -57,6 +57,13 @@ void reset_polynome ( polynome_t *poly )
     init_polynome (poly);
 }
 
+void free_polynome ( polynome_t **poly )
+{
+    reset_polynome (*poly);
+    free (*poly);
+    *poly = NULL; 
+}
+
 int push_monome ( polynome_t *poly, double factor )
 {
 	_lp_monome_t *new_monome;
