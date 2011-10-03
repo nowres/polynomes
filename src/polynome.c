@@ -89,10 +89,10 @@ double* get_polynome_factors (polynome_t *poly)
 
     factors = malloc ( (poly->order + 1) * sizeof (*factors) );
     
-    ptr = factors + poly->order;
+    ptr = factors;
     bal = poly->first;
     while ( bal ) {
-        *(ptr--) = bal->factor;
+        *(ptr++) = bal->factor;
         bal = bal->next;
     }
     return factors;

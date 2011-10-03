@@ -135,7 +135,7 @@ int print (const char* params)
                 factors = get_polynome_factors (poly->polynome);
                 printf("%c(%c) = ",poly->name, sym);
                 while ( fcount ) {
-                    printf("+(%lf) %c^%d ",factors[fcount],sym,--fcount);
+                    printf("+(%lf) %c^%d ",factors[poly->polynome->order - fcount],sym,--fcount);
                 }
                 free (factors);
                 _helper_end_get_params ();
