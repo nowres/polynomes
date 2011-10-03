@@ -31,7 +31,7 @@ polynome_t* create_polynome ( void )
 	polynome_t *poly;
 	if ( (poly = malloc ( sizeof *poly )) ) {
 		poly->first = NULL;
-		poly->order = 0;
+		poly->order = -1;
 	}
 	return poly;
 }
@@ -39,7 +39,7 @@ polynome_t* create_polynome ( void )
 void init_polynome ( polynome_t *poly )
 {
 	poly->first = NULL;
-	poly->order = 0;
+	poly->order = -1;
 }
 
 
