@@ -165,7 +165,6 @@ polynome_t* add_2polynomes ( polynome_t *poly1, polynome_t *poly2 )
 
 int copy_polynome ( polynome_t *poly1, polynome_t *poly2 )
 {
-    polynome_t *res;
     double *factors;
 
     factors = get_polynome_factors (poly2);
