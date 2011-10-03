@@ -136,30 +136,31 @@ polynome_t* add_2polynomes ( polynome_t *poly1, polynome_t *poly2 )
 {
     polynome_t *res;
     double *factors1, *factors2, *factors;
-    int i,max,min;
+    int i,j,k,max,min;
 
     res = create_polynome ();
     factors1 = get_polynome_factors (poly1);
     factors2 = get_polynome_factors (poly2);
     
-    max = (poly1->order > poly2->order) ? poly1->order + 1 : poly2->order + 1;
-    min = (poly1->order < poly2->order) ? poly1->order + 1 : poly2->order + 1;
-    factors = malloc (sizeof (*factors) * max );
-    for ( i = 0; i < min ; i++ ) {
-        factors[i] = factors1[i] + factors2[i];
+    max = (poly1->order > poly2->order) ? poly1->order : poly2->order;
+    min = (poly1->order < poly2->order) ? poly1->order : poly2->order;
+    factors = malloc (sizeof (*factors) * (max + 1) );
+    for (k = max, i = poly1->order , j = poly2->order ; (i >= 0) && (j >= 0) ; i-- , j--, k--) {
+        factors[k] = factors1[i] + factors2[j];
     }
     
-    while ( i <= poly1->order ) {
-        factors[i++] = factors1[i];
+    for ( i = 0 ; i < (poly1->order - min) ; i++ ){
+        factors[i] = factors1[i];
     }
 
-    while ( i <= poly2->order ) {
-        factors[i++] = factors2[i];
+    for ( i = 0 ; i < (poly2->order - min) ; i++ ){
+        factors[i] = factors2[i];
     }
     
-    set_polynome ( res , factors , max - 1 );
+    set_polynome ( res , factors , max );
     free (factors1);
     free (factors2);
+    free (factors);
     return res;
 }
 
