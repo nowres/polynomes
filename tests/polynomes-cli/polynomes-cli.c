@@ -50,6 +50,7 @@ keyword_t keywords[] = {
 {EXIT,"exit"},
 {VAL,"val"},
 {PRINT,"print"},
+{ADD,"add"},
 };
 
 int number_of_keywords = sizeof keywords/sizeof(keyword_t);
@@ -120,6 +121,7 @@ int main()
             case DEF: define_polynome (read_buffer);break;
             case VAL: value (read_buffer);break;
             case PRINT: print (read_buffer);break;
+            case ADD: add (read_buffer);break;
             case INVALID:
             default:fprintf(stderr,"invalid keyword\n");
         }

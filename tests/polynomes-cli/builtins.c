@@ -156,3 +156,45 @@ int print (const char* params)
     _helper_end_get_params ();
     return 2;
 }
+
+int add (const char* params)
+{
+    char *ptr,p1,p2;
+    struct polynomes_table_node_t *poly1,*poly2;
+    polynome_t *poly;
+
+    ptr = _helper_get_first_param (params);
+    if (isalpha(*ptr)) {
+        p1 = toupper(*ptr);
+        if ( (poly1 = _helper_search_polynome_table_node ( p1 ))) {
+            ptr = _helper_get_next_param ();
+            if ( isalpha(*ptr) ) {
+                p2 = toupper (*ptr);
+                if ( (poly2 = _helper_search_polynome_table_node ( p2 ))) {
+                    poly = add_2polynomes ( poly1->polynome , poly2->polynome );
+
+                    copy_polynome ( poly1->polynome , poly );
+                    free_polynome ( &poly );
+                    _helper_end_get_params ();
+                    return 0;
+                } else {
+                    printf("Polynome %c not defined",p2);
+                    _helper_end_get_params ();
+                    return 1;
+                }
+            }else {
+                printf("Syntax error!");
+                _helper_end_get_params ();
+                return 3;                
+            }
+
+        } else {
+            printf("Polynome %c not defined",p1);
+            _helper_end_get_params ();
+            return 1;
+        }       
+    }
+    printf("Syntax error!");
+    _helper_end_get_params ();
+    return 2;
+}

@@ -4,5 +4,6 @@
 void define_polynome (const char *params);
 int value (const char *params);
 int print (const char *params);
+int add (const char* params);
 
 #endif

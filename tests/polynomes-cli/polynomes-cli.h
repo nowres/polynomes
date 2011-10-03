@@ -30,3 +30,4 @@
 #define EXIT 2
 #define VAL 3
 #define PRINT 4
+#define ADD 5
