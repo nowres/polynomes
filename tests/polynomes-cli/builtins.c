@@ -40,6 +40,30 @@ static char* _helper_get_next_param ()
     return strtok (NULL, " ");
 }
 
+static void _helper_insert_polynome_table_node ( char name, double* factors , int order )
+{
+    struct polynomes_table_node_t *new_poly;
+    new_poly = malloc(sizeof *new_poly);
+    new_poly->next = polynomes_table.first;
+    new_poly->name = toupper(name);
+    polynomes_table.first = new_poly;
+    new_poly->polynome = create_polynome ();
+    set_polynome (new_poly->polynome, factors , order);
+}
+
+static struct polynomes_table_node_t* _helper_search_polynome_table_node ( char name )
+{
+    struct polynomes_table_node_t *bal;
+    bal = polynomes_table.first;
+    while ( bal ){
+        if (bal->name == name ) {
+            return bal;
+        }
+        bal = bal->next;
+    }
+    return NULL;
+}
+
 /** END parameters manipulation helpers **/
 
 
@@ -49,26 +73,19 @@ static char* _helper_get_next_param ()
 **/
 void define_polynome (const char *params)
 {
-    char *ptr;
+    char *ptr,name;
     double *cparams;
     int pcount;
-    struct polynomes_table_node_t *new_poly;
 
     ptr = _helper_get_first_param (params);
-    if (isalpha(*ptr)) {
-
-        new_poly = malloc(sizeof *new_poly);
-        new_poly->next = polynomes_table.first;
-        new_poly->name = toupper(*ptr);
-        polynomes_table.first = new_poly;
+    if (isalpha((name = *ptr))) {
 
         pcount = 0;
         cparams = malloc( sizeof(*cparams) * (strlen(params)) );
         while ( (ptr = _helper_get_next_param ()) ) {
             cparams[pcount++] = strtod (ptr,NULL);
         }
-        new_poly->polynome = create_polynome ();
-        set_polynome (new_poly->polynome, cparams , pcount - 1);
+        _helper_insert_polynome_table_node ( name, cparams , pcount - 1 );
     }
     else
         printf("Syntax error!");
@@ -79,25 +96,21 @@ int value (const char *params)
 {
     char *ptr;
     double val,res;
-    struct polynomes_table_node_t *bal;
+    struct polynomes_table_node_t *poly;
 
     ptr = _helper_get_first_param (params);
     if (isalpha(*ptr)) {
-        *ptr = toupper(*ptr);
-        bal = polynomes_table.first;
-        while ( bal ){
-            if (bal->name == *ptr) {
-                val = strtod (_helper_get_next_param (),NULL);
-                polynome_value ( bal->polynome , val, &res);
-                printf("%c(%lf) = %lf",bal->name , val, res);
-                _helper_end_get_params ();
-                return 0;
-            }
-            bal = bal->next;
+        if ( (poly = _helper_search_polynome_table_node ( toupper (*ptr) ))) {
+            val = strtod (_helper_get_next_param (),NULL);
+            polynome_value ( poly->polynome , val, &res);
+            printf("%c(%lf) = %lf",poly->name , val, res);
+            _helper_end_get_params ();
+            return 0;
+        } else {
+            printf("Polynome %c not defined",*ptr);
+            _helper_end_get_params ();
+            return 1;
         }
-        printf("Polynome %c not defined",*ptr);
-        _helper_end_get_params ();
-        return 1;
     }
     printf("Syntax error!");
     _helper_end_get_params ();
@@ -109,37 +122,35 @@ int print (const char* params)
     char *ptr,sym;
     double *factors;
     int fcount;
-    struct polynomes_table_node_t *bal;
+    struct polynomes_table_node_t *poly;
 
     ptr = _helper_get_first_param (params);
     if (isalpha(*ptr)) {
         *ptr = toupper(*ptr);
-        bal = polynomes_table.first;
-        while ( bal ){
-            if (bal->name == *ptr) {
-                ptr = _helper_get_next_param ();
-                sym = *ptr;
-                if ( isalpha(sym) ) {
-                    fcount = bal->polynome->order;
-                    factors = get_polynome_factors (bal->polynome);
-                    printf("%c(%c) = ",bal->name, sym);
-                    while ( fcount ) {
-                        printf("+(%lf) %c^%d ",factors[fcount--],sym,fcount);
-                    }
-                    free (factors);
-                    _helper_end_get_params ();
-                    return 0;
-                }else {
-                    printf("Syntax error!");
-                    _helper_end_get_params ();
-                    return 3;                
+        if ( (poly = _helper_search_polynome_table_node ( *ptr ))) {
+            ptr = _helper_get_next_param ();
+            sym = *ptr;
+            if ( isalpha(sym) ) {
+                fcount = poly->polynome->order;
+                factors = get_polynome_factors (poly->polynome);
+                printf("%c(%c) = ",poly->name, sym);
+                while ( fcount ) {
+                    printf("+(%lf) %c^%d ",factors[fcount--],sym,fcount);
                 }
+                free (factors);
+                _helper_end_get_params ();
+                return 0;
+            }else {
+                printf("Syntax error!");
+                _helper_end_get_params ();
+                return 3;                
             }
-            bal = bal->next;
-        }
-        printf("Polynome %c not defined",*ptr);
-        _helper_end_get_params ();
-        return 1;
+
+        } else {
+            printf("Polynome %c not defined",*ptr);
+            _helper_end_get_params ();
+            return 1;
+        }       
     }
     printf("Syntax error!");
     _helper_end_get_params ();
