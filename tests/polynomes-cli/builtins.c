@@ -16,7 +16,7 @@ struct {
 } polynomes_table;
 
 
-/** BEGIN parameters manipulation helpers **/
+/** BEGIN helpers **/
 char *pbuf;
 
 static void _helper_end_get_params ()
@@ -64,7 +64,7 @@ static struct polynomes_table_node_t* _helper_search_polynome_table_node ( char 
     return NULL;
 }
 
-/** END parameters manipulation helpers **/
+/** END helpers **/
 
 
 /** 
